@@ -1,0 +1,13 @@
+.container {
+  margin: 50px auto;
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer {
+  color: #fff;
+  border-radius: 0;
+  padding: 20px 0;
+}
