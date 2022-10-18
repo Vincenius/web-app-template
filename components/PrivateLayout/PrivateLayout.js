@@ -1,8 +1,13 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import Navigation from './Navigation'
 
-const PrivateLayout = ({ children }) => {
+const drawerWidth = 240;
+
+const PrivateLayout = ({ children, title }) => {
   const router = useRouter()
   const { data: session, loading } = useSession()
 
@@ -16,9 +21,18 @@ const PrivateLayout = ({ children }) => {
     return <div></div>
   }
 
-  return <div>
-    { children }
-  </div>
+  return <Box sx={{ display: 'flex' }}>
+    <Navigation drawerWidth={drawerWidth} title={title} />
+
+    <Box
+      component="main"
+      sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+    >
+      <Toolbar />
+
+      { children }
+    </Box>
+  </Box>
 }
 
 export default PrivateLayout

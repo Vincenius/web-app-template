@@ -1,10 +1,10 @@
 import React from 'react'
 import PrivateLayout from '../components/PrivateLayout/PrivateLayout'
 
-const Dashboard = () => {
-    return <PrivateLayout title="Dashboard">
-      Dashboard
+const Settings = () => {
+    return <PrivateLayout title="Settings">
+      Settings
     </PrivateLayout>
 }
 
-export default Dashboard
+export default Settings
