@@ -20,7 +20,7 @@ const Login = () => {
 
   useEffect(() => {
     if (!!session) {
-      router.push('/dashboard')
+      router.push('/app/dashboard')
     }
   }, [session, router])
 

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { signOut } from 'next-auth/react'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -20,11 +21,11 @@ import LineStyleIcon from '@mui/icons-material/LineStyle';
 const MENU_ITEMS = [{
   title: 'Dashboard',
   Icon: MailIcon,
-  link: '/dashboard',
+  link: '/app/dashboard',
 }, {
   title: 'Settings',
   Icon: MailIcon,
-  link: '/settings',
+  link: '/app/settings',
 }]
 
 function Navigation(props) {
@@ -71,7 +72,7 @@ function Navigation(props) {
       <Divider />
       <List>
         {['Logout'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+          <ListItem key={text} disablePadding onClick={signOut}>
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}

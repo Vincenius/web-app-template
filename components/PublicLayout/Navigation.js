@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -23,9 +23,9 @@ const pages = [
   { title: 'Blog', link: '/#blog' },
 ]
 const settings = [
-  { title: 'Dashboard', link: '/dashboard' },
-  { title: 'Settings', link: '/settings' },
-  { title: 'Logout', link: '/api/auth/signout' }, // TODO onClick={() => signOut()
+  { title: 'Dashboard', link: '/app/dashboard' },
+  { title: 'Settings', link: '/app/settings' },
+  // LOGOUT is below
 ]
 const signIn = [
   { title: 'Sign-up', link: '/sign-up' },
@@ -175,6 +175,9 @@ const ResponsiveAppBar = () => {
                   </MenuItem>
                 </Link>
               ))}
+              <MenuItem onClick={signOut}>
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
             </Menu>
           </Box> }
 
