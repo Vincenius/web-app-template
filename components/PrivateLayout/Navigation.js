@@ -17,6 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import LineStyleIcon from '@mui/icons-material/LineStyle';
+import { APP_NAME } from '../../utils/constants'
 
 const MENU_ITEMS = [{
   title: 'Dashboard',
@@ -53,7 +54,7 @@ function Navigation(props) {
             textDecoration: 'none',
           }}
         >
-          Modest
+          { APP_NAME }
         </Typography>
       </Toolbar>
       <Divider />

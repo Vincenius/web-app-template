@@ -4,11 +4,14 @@ import Container from '@mui/material/Container'
 import { Paper } from '@mui/material'
 import Navigation from './Navigation'
 import style from './PublicLayout.module.css'
+import { APP_NAME } from '../../utils/constants'
 
-const PublicLayout = ({ children, title, description }) => {
+const PublicLayout = ({ children, title, description, noAppNameInTitle }) => {
+  const pageTitle = `${title}${noAppNameInTitle ? '' : ` | ${APP_NAME}`}`
+
   return <div>
     <Head>
-      <title>{title}</title>
+      <title>{pageTitle}</title>
       <meta name="description" content={description} />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <link rel="icon" href="/favicon.ico" />

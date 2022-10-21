@@ -42,7 +42,7 @@ const Login = () => {
   }
 
   return <PublicLayout
-    title="Login | Modest"
+    title="Login"
     description="Log in into your micro-blog"
   >
     <Card sx={{ width: 300, margin: '0 auto' }}>

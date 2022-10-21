@@ -56,7 +56,7 @@ const Login = () => {
   }
 
   return <PublicLayout
-    title="Sign Up | Modest"
+    title="Sign Up"
     description="Create a new account for your own micro-blogging website."
   >
     <Card sx={{ width: 300, margin: '0 auto' }}>

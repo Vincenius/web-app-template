@@ -9,16 +9,21 @@ export default async function handler(req, res) {
 
   if (result.length) {
     const expires = new Date()
+    const token = uuidv4()
     expires.setHours(expires.getHours() + 1);
     const update = {
-      reset_link: uuidv4(),
+      reset_token: token,
       reset_expires: expires.toISOString(),
     }
-    await dynamoDb.updateUserByEmail({ email, update })
 
-    await emailHelper.sendEmail({ to: email })
-
-    res.status(200).json()
+    try {
+      await dynamoDb.updateUserByEmail({ email, update })
+      await emailHelper.sendEmail({ to: email, token })
+      res.status(200).json()
+    } catch (err) {
+      console.err('unexpected error', err)
+      res.status(500).json()
+    }
   } else {
     res.status(404).json()
   }

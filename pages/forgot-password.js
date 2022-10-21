@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Link from '@mui/material/Link'
 import Card from '@mui/material/Card'
 import Box from '@mui/material/Box'
 import CardContent from '@mui/material/CardContent'
@@ -10,8 +9,12 @@ import PublicLayout from '../components/PublicLayout/PublicLayout'
 
 const Forgot = () => {
   const [email, setEmail] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [isError, setIsError] = useState(false)
 
   const submit = e => {
+    setIsLoading(true)
     e.preventDefault()
     const options = {
       method: 'POST',
@@ -23,17 +26,17 @@ const Forgot = () => {
     fetch('/api/auth/reset-password', options)
       .then(async res => {
         if (res.status !== 200) {
-          // TODO display success??
+          setIsError(true)
         } else {
-          // TODO display success??
-          // const result = await res.json()
+          setIsSuccess(true)
         }
+        setIsLoading(false)
       })
       .catch(e => setError('Unexpected Error'))
   }
 
   return <PublicLayout
-    title="Forgot Password | Modest"
+    title="Forgot Password"
     description="Reset the password for your account."
   >
     <Card sx={{ width: 300, margin: '0 auto' }}>
@@ -46,24 +49,41 @@ const Forgot = () => {
           Tell us the email address associated with your account, and we’ll send you an email with a link to reset your password.
         </Typography>
 
-        <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { m: '10px 0', width: '100%' },
-          }}
-          onSubmit={submit}
-        >
-          <TextField
-            required
-            label="E-Mail"
-            variant="outlined"
-            value={email}
-            onChange={e => {
-              setEmail(e.target.value)
+        {isSuccess && <Typography gutterBottom color="success.main" style={{ fontSize: '0.8em' }}>
+          The reset email was successfully sent.
+        </Typography>}
+
+        { !isSuccess &&
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: '10px 0', width: '100%' },
             }}
-          />
-          <Button variant="contained" type="submit" style={{ margin: '10px 0 0', width: '100%' }}>Submit</Button>
-        </Box>
+            onSubmit={submit}
+          >
+            <TextField
+              required
+              label="E-Mail"
+              variant="outlined"
+              type="email"
+              value={email}
+              onChange={e => {
+                setEmail(e.target.value)
+              }}
+            />
+
+            {isError && <Typography gutterBottom color="error.main" style={{ fontSize: '0.8em' }}>
+                Something went wrong. Please try again.
+            </Typography>}
+
+            <Button
+              variant="contained"
+              type="submit"
+              style={{ margin: '10px 0 0', width: '100%' }}
+              disabled={isLoading}
+            >Submit</Button>
+          </Box>
+        }
       </CardContent>
     </Card>
   </PublicLayout>

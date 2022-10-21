@@ -16,6 +16,7 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import LineStyleIcon from '@mui/icons-material/LineStyle'
 import Divider from '@mui/material/Divider'
+import { APP_NAME } from '../../utils/constants'
 
 const pages = [
   { title: 'Home', link: '/' },
@@ -70,7 +71,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            Modest
+            { APP_NAME }
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -134,7 +135,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            Modest
+            { APP_NAME }
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
