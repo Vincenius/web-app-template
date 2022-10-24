@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Link from 'next/link';
 import { signOut } from 'next-auth/react'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -61,12 +62,14 @@ function Navigation(props) {
       <List>
         {MENU_ITEMS.map(item => (
           <ListItem key={item.title} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <item.Icon />
-              </ListItemIcon>
-              <ListItemText primary={item.title} />
-            </ListItemButton>
+            <Link href={item.link}>
+              <ListItemButton>
+                <ListItemIcon>
+                  <item.Icon />
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </Link>
           </ListItem>
         ))}
       </List>

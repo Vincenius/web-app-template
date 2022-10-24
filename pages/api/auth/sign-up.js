@@ -2,9 +2,9 @@ import dynamoDb from '../../../lib/mongo-helper'
 
 export default async function handler(req, res) {
   await dynamoDb.connectDb()
-  const result = await dynamoDb.getUserByEmail(req.body.email)
+  const [user] = await dynamoDb.getUserByQuery({ email: req.body.email })
 
-  if (result.length) {
+  if (user) {
     res.status(409).json({ error: 'Email exists' })
   } else {
     await dynamoDb.createUser(req.body)

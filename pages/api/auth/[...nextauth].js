@@ -15,15 +15,13 @@ export const authOptions = {
       },
       async authorize(credentials, req) {
         await dynamoDb.connectDb()
-        console.log('YO')
-        const [result] = await dynamoDb.getUserByEmail(req.body.username)
+        const [user] = await dynamoDb.getUserByQuery({ email: req.body.username })
         await dynamoDb.disconnectDb()
-        console.log('YOYO')
 
-        if (result) {
-          const isCorrectPass = bcrypt.compareSync(req.body.password, result.password)
+        if (user) {
+          const isCorrectPass = bcrypt.compareSync(req.body.password, user.password)
           if (isCorrectPass) {
-            return result
+            return user
           } else {
             return null
           }

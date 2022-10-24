@@ -23,7 +23,7 @@ const Forgot = () => {
           'Content-Type': 'application/json'
       }
     }
-    fetch('/api/auth/reset-password', options)
+    fetch('/api/auth/forgot-password', options)
       .then(async res => {
         if (res.status !== 200) {
           setIsError(true)

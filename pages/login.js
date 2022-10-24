@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { signIn, useSession } from 'next-auth/react'
-import Link from '@mui/material/Link'
 import Card from '@mui/material/Card'
 import Box from '@mui/material/Box'
 import CardContent from '@mui/material/CardContent'
@@ -9,6 +8,7 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import PublicLayout from '../components/PublicLayout/PublicLayout'
+import Link from '../components/Link/Link'
 
 const Login = () => {
   const router = useRouter()

@@ -7,6 +7,7 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import PublicLayout from '../components/PublicLayout/PublicLayout'
+import Link from '../components/Link/Link'
 
 const Reset = () => {
   const [newPassword, setNewPassword] = useState('')
@@ -33,16 +34,21 @@ const Reset = () => {
             'Content-Type': 'application/json'
         }
       }
-      fetch('/api/auth/new-password', options)
+      fetch('/api/auth/reset-password', options)
         .then(async res => {
           if (res.status !== 200) {
-            setIsError(true)
+            const errorMessage = res.status === '500' ? 'unexpected' : 'expired'
+            setError(errorMessage)
           } else {
             setIsSuccess(true)
+            setError('')
           }
           setIsLoading(false)
         })
-        .catch(e => setError('Unexpected Error'))
+        .catch(e => {
+          setError('unexpected')
+          setIsLoading(false)
+        })
     }
   }
 
@@ -56,12 +62,12 @@ const Reset = () => {
           Reset your password
         </Typography>
 
-        <Typography gutterBottom style={{ padding: '4px', color: '#616161', fontSize: '0.9em' }}>
+        { !isSuccess && <Typography gutterBottom style={{ padding: '4px', color: '#616161', fontSize: '0.9em' }}>
           Choose a new password.
-        </Typography>
+        </Typography> }
 
-        {isSuccess && <Typography gutterBottom color="success.main" style={{ fontSize: '0.8em' }}>
-          The password was successfully updated. TODO login link
+        { isSuccess && <Typography gutterBottom color="success.main" style={{ fontSize: '1em' }}>
+          The password was successfully updated.
         </Typography>}
 
         { !isSuccess &&
@@ -102,7 +108,7 @@ const Reset = () => {
               The passwords do not match.
             </Typography> }
             { error === 'expired' && <Typography gutterBottom color="error.main" style={{ fontSize: '0.8em' }}>
-              The reset token has expired. Please generate a new reset token.
+              The reset token is invalid or has expired. Please generate a new reset token.
             </Typography> }
             { error && error !== 'expired' && error !== 'not_equal' && <Typography gutterBottom color="error.main" style={{ fontSize: '0.8em' }}>
               Something went wrong. Please try again.
@@ -116,6 +122,12 @@ const Reset = () => {
             >Submit</Button>
           </Box>
         }
+
+        { isSuccess && <Link href="/login">
+          <Typography gutterBottom style={{ fontSize: '1em', marginTop: '1.5em' }}>
+            Log into your account
+          </Typography>
+        </Link> }
       </CardContent>
     </Card>
   </PublicLayout>

@@ -1,27 +1,31 @@
+import bcrypt from 'bcrypt'
 import dynamoDb from '../../../lib/mongo-helper'
-import emailHelper from '../../../lib/email-helper'
-import { v4 as uuidv4 } from 'uuid'
+
+const saltRounds = parseInt(process.env.SALT_ROUNDS, 10)
 
 export default async function handler(req, res) {
   await dynamoDb.connectDb()
-  const { email } = req.body
-  const result = await dynamoDb.getUserByEmail(email)
+  const { password, token } = req.body
 
-  if (result.length) {
-    const expires = new Date()
-    const token = uuidv4()
-    expires.setHours(expires.getHours() + 1);
-    const update = {
-      reset_token: token,
-      reset_expires: expires.toISOString(),
-    }
-
+  if (password && token) {
     try {
-      await dynamoDb.updateUserByEmail({ email, update })
-      await emailHelper.sendEmail({ to: email, token })
-      res.status(200).json()
+      const [user] = await dynamoDb.getUserByQuery({ reset_token: token })
+      const now = new Date()
+
+      if (!!user && new Date(user.reset_expires) > now) {
+        const hash = await bcrypt.hash(password, saltRounds)
+        const update = {
+          password: hash,
+          reset_token: null,
+          reset_expires: null,
+        }
+        await dynamoDb.updateUserByEmail({ email: user.email, update })
+        res.status(200).json()
+      } else {
+        res.status(404).json()
+      }
     } catch (err) {
-      console.err('unexpected error', err)
+      console.error('Unexpected error on password reset', err)
       res.status(500).json()
     }
   } else {
