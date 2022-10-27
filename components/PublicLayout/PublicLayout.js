@@ -6,7 +6,7 @@ import Navigation from './Navigation'
 import style from './PublicLayout.module.css'
 import { APP_NAME } from '../../utils/constants'
 
-const PublicLayout = ({ children, title, description, noAppNameInTitle }) => {
+const PublicLayout = ({ children, title, description, noAppNameInTitle, transparentNav }) => {
   const pageTitle = `${title}${noAppNameInTitle ? '' : ` | ${APP_NAME}`}`
 
   return <div>
@@ -18,7 +18,7 @@ const PublicLayout = ({ children, title, description, noAppNameInTitle }) => {
       {/* TODO head meta info and font*/}
     </Head>
 
-    <Navigation />
+    <Navigation transparentNav={transparentNav} />
 
     <Container maxWidth="lg" component="main" className={style.container}>
       {children}

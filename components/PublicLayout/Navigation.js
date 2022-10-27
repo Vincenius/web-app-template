@@ -1,6 +1,7 @@
 // https://mui.com/material-ui/react-app-bar/
 
 import * as React from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useSession, signOut } from 'next-auth/react'
 import AppBar from '@mui/material/AppBar'
@@ -20,8 +21,8 @@ import { APP_NAME } from '../../utils/constants'
 
 const pages = [
   { title: 'Home', link: '/' },
+  { title: 'Features', link: '/#features' },
   { title: 'Pricing', link: '/#pricing' },
-  { title: 'Blog', link: '/#blog' },
 ]
 const settings = [
   { title: 'Dashboard', link: '/app/dashboard' },
@@ -33,7 +34,8 @@ const signIn = [
   { title: 'Login', link: '/login' },
 ]
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = ({ transparentNav }) => {
+  const router = useRouter()
   const { data: session } = useSession()
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
@@ -54,7 +56,11 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="static"
+      color={transparentNav ? 'transparent' : 'primary'}
+      style={transparentNav ? { boxShadow: 'none' } : {}}
+    >
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <LineStyleIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -105,7 +111,7 @@ const ResponsiveAppBar = () => {
             >
               {pages.map((page) => (
                 <Link href={page.link} key={page.title}>
-                  <MenuItem>
+                  <MenuItem selected={page.link === router.asPath}>
                     <Typography textAlign="center">{page.title}</Typography>
                   </MenuItem>
                 </Link>
@@ -113,7 +119,7 @@ const ResponsiveAppBar = () => {
               <Divider />
               {signIn.map((item) => (
                 <Link href={item.link} key={item.title}>
-                  <MenuItem >
+                  <MenuItem selected={item.link === router.asPath}>
                     <Typography textAlign="center">{item.title}</Typography>
                   </MenuItem>
                 </Link>
@@ -140,7 +146,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Link href={page.link} key={page.title}>
-                <MenuItem >
+                <MenuItem selected={page.link === router.asPath}>
                   <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
               </Link>
@@ -171,7 +177,7 @@ const ResponsiveAppBar = () => {
             >
               {settings.map((setting) => (
                 <Link href={setting.link} key={setting.title}>
-                  <MenuItem>
+                  <MenuItem selected={setting.link === router.asPath}>
                     <Typography textAlign="center">{setting.title}</Typography>
                   </MenuItem>
                 </Link>
@@ -185,7 +191,7 @@ const ResponsiveAppBar = () => {
           { !session && <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
               {signIn.map((item) => (
                 <Link href={item.link} key={item.title}>
-                  <MenuItem selected={true}>
+                  <MenuItem>
                     <Typography textAlign="center">{item.title}</Typography>
                   </MenuItem>
                 </Link>
