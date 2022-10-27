@@ -5,9 +5,11 @@ import { Paper } from '@mui/material'
 import Navigation from './Navigation'
 import style from './PublicLayout.module.css'
 import { APP_NAME } from '../../utils/constants'
+import Link from '../Link/Link'
 
 const PublicLayout = ({ children, title, description, noAppNameInTitle, transparentNav }) => {
   const pageTitle = `${title}${noAppNameInTitle ? '' : ` | ${APP_NAME}`}`
+  const now = new Date()
 
   return <div>
     <Head>
@@ -25,8 +27,14 @@ const PublicLayout = ({ children, title, description, noAppNameInTitle, transpar
     </Container>
 
     <Paper component="footer" sx={{ backgroundColor: 'primary.main' }} className={style.footer}>
-      <Container maxWidth="lg">
-        footer
+      <Container maxWidth="lg" className={style.footerInner}>
+        © {now.getFullYear()} {APP_NAME}
+
+        <div>
+          <Link href="/privacy" className={style.footerLink}>
+            Privacy
+          </Link>
+        </div>
       </Container>
     </Paper>
   </div>

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Link from 'next/link'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -8,7 +9,6 @@ import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Grid';
 import StarIcon from '@mui/icons-material/StarBorder';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 
@@ -49,7 +49,7 @@ const tiers = [
       'Help center access',
       'Phone & email support',
     ],
-    buttonText: 'Contact us',
+    buttonText: 'Get started',
     buttonVariant: 'outlined',
   },
 ];
@@ -70,9 +70,7 @@ function PricingContent() {
           Pricing
         </Typography>
         <Typography variant="h5" align="center" color="text.secondary" component="p">
-          Quickly build an effective pricing table for your potential customers with
-          this layout. It&apos;s built with default MUI components with little
-          customization.
+          This is just a dummy pricing layout. Actually this template is free!
         </Typography>
       </Container>
       {/* End hero unit */}
@@ -133,9 +131,11 @@ function PricingContent() {
                   </ul>
                 </CardContent>
                 <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant}>
-                    {tier.buttonText}
-                  </Button>
+                  <Link href="/sign-up">
+                    <Button fullWidth variant={tier.buttonVariant}>
+                      {tier.buttonText}
+                    </Button>
+                  </Link>
                 </CardActions>
               </Card>
             </Grid>

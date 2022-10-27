@@ -27,7 +27,6 @@ const pages = [
 const settings = [
   { title: 'Dashboard', link: '/app/dashboard' },
   { title: 'Settings', link: '/app/settings' },
-  // LOGOUT is below
 ]
 const signIn = [
   { title: 'Sign-up', link: '/sign-up' },

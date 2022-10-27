@@ -1,6 +1,6 @@
 .container {
   margin: 50px auto;
-  min-height: 75vh;
+  min-height: calc(100vh - 223px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,4 +10,20 @@
   color: #fff;
   border-radius: 0;
   padding: 20px 0;
+}
+
+.footerInner {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+@media (max-width: 599px) {
+  .container {
+    min-height: calc(100vh - 215px);
+  }
 }
