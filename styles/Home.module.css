@@ -74,7 +74,9 @@ background-image: linear-gradient(132deg, #F4D03F 0%, #16A085 100%);
 }
 
 .section {
-  padding: 200px 0;
+  padding: 200px 50px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 @media (max-width: 1200px) {

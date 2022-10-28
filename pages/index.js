@@ -45,8 +45,18 @@ export default function Home() {
           >
             Features
           </Typography>
-          <Typography variant="h5" align="center" color="text.secondary" component="p">
-            List your cool features here!
+
+          <Typography variant="h5" color="text.secondary" component="p" gutterBottom>
+            🔒 Authentication logic using <code>next-auth/react</code>
+          </Typography>
+          <Typography variant="h5" color="text.secondary" component="p" gutterBottom>
+            📈 User creation stored in <code>MongoDB</code>
+          </Typography>
+          <Typography variant="h5" color="text.secondary" component="p" gutterBottom>
+            🎨 A landing page, authentication pages and a logged in view created with <code>MaterialUI</code>
+          </Typography>
+          <Typography variant="h5" color="text.secondary" component="p">
+            ✉️ Reset password logic and email sending with <code>nodemailer</code>
           </Typography>
         </section>
         <section className={styles.section} id="pricing">
