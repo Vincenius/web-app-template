@@ -4,7 +4,7 @@ import PublicLayout from '../components/PublicLayout/PublicLayout'
 export default function Home() {
   return (
     <PublicLayout
-      title="Modest App | Privacy Policy"
+      title="Web App | Privacy Policy"
       noAppNameInTitle={true}
       transparentNav={true}
     >

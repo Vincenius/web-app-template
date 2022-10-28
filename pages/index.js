@@ -6,8 +6,8 @@ import styles from '../styles/Home.module.css'
 export default function Home() {
   return (
     <PublicLayout
-      title="Modest App | Micro-blogging platform to quickly create a twitter-like blog"
-      description="This is a micro-blogging template to quickly create a twitter-like blog. You can write in markdown and upload images and videos."
+      title="Web App Template"
+      description="A Next.js template including authentication and a lot more."
       noAppNameInTitle={true}
       transparentNav={true}
     >
