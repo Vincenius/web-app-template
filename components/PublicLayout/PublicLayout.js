@@ -30,11 +30,9 @@ const PublicLayout = ({ children, title, description, noAppNameInTitle, transpar
       <Container maxWidth="lg" className={style.footerInner}>
         © {now.getFullYear()} {APP_NAME}
 
-        <div>
-          <Link href="/privacy" className={style.footerLink}>
-            Privacy
-          </Link>
-        </div>
+        <Link href="/privacy">
+          Privacy
+        </Link>
       </Container>
     </Paper>
   </div>
