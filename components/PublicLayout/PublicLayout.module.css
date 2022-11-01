@@ -15,11 +15,13 @@
 .footerInner {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .footer a {
   color: #fff;
   text-decoration: underline;
+  border-radius: 0;
 }
 
 @media (max-width: 599px) {
