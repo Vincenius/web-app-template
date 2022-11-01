@@ -28,7 +28,7 @@ const PublicLayout = ({ children, title, description, noAppNameInTitle, transpar
 
     <Paper component="footer" sx={{ backgroundColor: 'primary.main' }} className={style.footer}>
       <Container maxWidth="lg" className={style.footerInner}>
-        © {now.getFullYear()} {APP_NAME}
+        <span>© {now.getFullYear()} {APP_NAME}</span>
 
         <Link href="/privacy">
           Privacy
